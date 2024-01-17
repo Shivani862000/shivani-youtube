@@ -1,6 +1,5 @@
 
 import React from "react";
-import { Commentbox } from "./Commentbox.jsx";
 import { CommentList } from "./CommentList.jsx";
 
 const commentsData = [

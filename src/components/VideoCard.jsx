@@ -17,7 +17,7 @@ export const VideoCard=({info})=>{
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title || "title"}</div>
         <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet.
+         { channelTitle}
         </p>
         <p className="text-gray-700 text-base">
            views {statistics.viewCount}
