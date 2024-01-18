@@ -96,7 +96,7 @@ export const Head = () => {
           <FiBell className="text-black text-xl cursor-pointer" />
         </div>
         <img
-          className="h-6"
+          className="h-8 w-8 rounded-full ml-3 hover:bg-[#303030]/[0.6] cursor-pointer"
           alt="user"
           src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
         />

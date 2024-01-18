@@ -33,7 +33,7 @@ export const LiveChat = () => {
       </div>
 
       <form
-        className="w-full p-2 ml-2 border border-black"
+        className="w-full p-2 ml-2 my-8 border border-black"
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(
