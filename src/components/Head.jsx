@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { searchQuery } from "../utils/constant";
 import { cacheResults } from "../utils/searchSlice";
-
+import { RiVideoAddLine } from "react-icons/ri";
+import { FiBell } from "react-icons/fi";
 export const Head = () => {
   const [searchQueryy, setSearchQueryy] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -12,14 +13,12 @@ export const Head = () => {
   const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchCache[searchQueryy]) {
         setSuggestions(searchCache[searchQueryy]);
       } else {
-        getSearchSugsestions();
+        getSearchSuggestions();
       }
     }, 200);
 
@@ -28,10 +27,9 @@ export const Head = () => {
     };
   }, [searchQueryy]);
 
-  const getSearchSugsestions = async () => {
+  const getSearchSuggestions = async () => {
     const data = await fetch(searchQuery + searchQueryy);
     const json = await data.json();
-    //console.log(json[1]);
     setSuggestions(json[1]);
 
     // update cache
@@ -47,7 +45,7 @@ export const Head = () => {
   };
 
   return (
-    <div className="grid grid-flow-col p-5 m-2 shadow-lg">
+    <div className="grid grid-cols-12 p-5 m-2 shadow-lg justify-between items-center">
       <div className="flex col-span-1">
         <img
           onClick={() => toggleMenuHandler()}
@@ -63,22 +61,22 @@ export const Head = () => {
           />
         </a>
       </div>
-      <div className="col-span-10 px-10">
-        <div>
+      <div className="col-start-3 col-span-8 flex items-center">
+        <div className="relative w-full max-w-[90%] ">
           <input
-            className="px-5 w-1/2 border border-gray-400 p-2 rounded-l-full"
+            className="px-5 w-full border border-gray-400 p-2 rounded-l-full"
             type="text"
             value={searchQueryy}
             onChange={(e) => setSearchQueryy(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
           />
-          <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
+          <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100 absolute right-0 top-0 bottom-0">
             🔍
           </button>
         </div>
         {showSuggestions && (
-          <div className="fixed bg-white py-2 px-2 w-[37rem] shadow-lg rounded-lg border border-gray-100 z-40 ">
+          <div className="absolute bg-white mt-2 p-2 w-[37rem] shadow-lg rounded-lg border border-gray-100">
             <ul>
               {suggestions.map((s) => (
                 <li key={s} className="py-2 px-3 shadow-sm hover:bg-gray-100">
@@ -89,14 +87,21 @@ export const Head = () => {
           </div>
         )}
       </div>
-      <div className="col-span-1">
+
+      <div className="col-span-1 flex items-center justify-end">
+        <div className="flex items-center justify-center h-10 w-10 rounded-full hover:bg-[#303030]/[0.6]">
+          <RiVideoAddLine className="text-black text-xl cursor-pointer" />
+        </div>
+        <div className="flex items-center justify-center ml-2 h-10 w-10 rounded-full hover:bg-[#303030]/[0.6]">
+          <FiBell className="text-black text-xl cursor-pointer" />
+        </div>
         <img
-          className="h-8"
+          className="h-6"
           alt="user"
           src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
         />
       </div>
+    
     </div>
   );
 };
-
