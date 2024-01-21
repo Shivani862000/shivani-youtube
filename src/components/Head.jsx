@@ -28,7 +28,7 @@ export const Head = () => {
   }, [searchQueryy]);
 
   const getSearchSuggestions = async () => {
-    const data = await fetch(searchQuery + searchQueryy);
+    const data = await fetch(`http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${searchQueryy}` );
     const json = await data.json();
     setSuggestions(json[1]);
 
